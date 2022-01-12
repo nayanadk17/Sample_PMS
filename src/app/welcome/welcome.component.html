@@ -1,11 +1,17 @@
+<div class="welcome-body">
 <mat-sidenav-container>
     <mat-sidenav #sidenav role="navigation">
         <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
       </mat-sidenav>
     <mat-sidenav-content>
         <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+        <div>
+            <img class="img-fluid" src="../assets/images/welcome.jpg">
+        </div>
+        <app-footer></app-footer>
         <main>
             <router-outlet></router-outlet>
         </main>
     </mat-sidenav-content>
 </mat-sidenav-container>
+</div>

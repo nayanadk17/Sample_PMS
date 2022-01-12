@@ -1,24 +1,20 @@
 a {
     text-decoration: none;
-    color: black;
-}
-
-.mat-button:hover {
-    background-color:rgb(163, 182, 233);
+    color: white;
 }
 
 a:hover, a:active{
-    color: rgb(110, 101, 187);
+    color: rgb(25, 19, 75);
 }
 
 .custom-toolbar {
-    background-color: white;
+    background-color: rgb(125 176 209);
     padding: 0 5px;
   }
 
 .img-logo{
-    width: 20%;
-    height: 12%;
+    width:48px;
+    height:48px
 }
 
 .navigation-items{
