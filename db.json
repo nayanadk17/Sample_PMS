@@ -1,0 +1,35 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "registerPatient": [
+    {
+      "fullName": "ravi",
+      "email": "abc@gmail.com",
+      "password": "1234",
+      "mobile": "234243",
+      "id": 1
+    },
+    {
+      "fullName": "gavi",
+      "email": "vvv@gmail.com",
+      "password": "12345",
+      "mobile": "2324",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

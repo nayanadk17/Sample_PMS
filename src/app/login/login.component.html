@@ -1,22 +1,25 @@
-<!-- <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-
-    <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title>Log in</mat-card-title>
-      </mat-card-header>
-  
-      <form class="example-form">
-        <mat-card-content>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
-          </mat-form-field>
-  
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
-          </mat-form-field>
-        </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button>
-      </form>
-    </mat-card>
-  
-  </div> -->
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="loginPatient()" >
+      <h2>Log In</h2>
+      <mat-error *ngIf="!loginValid">
+        The username and password were not recognized
+      </mat-error>
+      <mat-form-field>
+        <input formControlName="email" matInput placeholder="Email"  name="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"><!--[(ngModel)]="user.emailId"-->
+        <mat-error  >
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="password" matInput type="password" placeholder="Password"  name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" >Login</button>  <!--[disabled]="!loginForm.valid"-->
+    </form>
+  </mat-card-content>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  <a routerLink="/register" >New user? Click to signup</a>
+</mat-card>
