@@ -14,7 +14,6 @@ import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PatientLoginComponent } from './login/patient-login/patient-login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,7 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     SidenavListComponent,
     FooterComponent,
-    PatientLoginComponent,
     DashboardComponent
   ],
   imports: [

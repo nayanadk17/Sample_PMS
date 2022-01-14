@@ -10,13 +10,12 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class HeaderComponent implements OnInit {
 
-  //@Input() name: any;
-  @Output() public sidenavToggle = new EventEmitter();
+  @Output() 
+  public sidenavToggle = new EventEmitter();
 
   closeResult = '';
-
+  
   constructor(private modalService: NgbModal){}
-    //public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {
   }
@@ -25,32 +24,13 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
-  // open(content: any) {
-  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
-
-  openPatientLogin() {
+  openLogin(i:number) {
     const modalRef = this.modalService.open(LoginComponent);
-   // modalRef.componentInstance.name = 'World';
+    modalRef.componentInstance.isPatient=i==1?true:false
   }
 
   openRegister(){
     const modalRef = this.modalService.open(RegisterComponent);
-    modalRef.componentInstance.name = 'World';
   }
 
 }

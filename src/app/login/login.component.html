@@ -1,12 +1,12 @@
 <mat-card>
   <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="loginPatient()" >
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()" >
       <h2>Log In</h2>
       <mat-error *ngIf="!loginValid">
         The username and password were not recognized
       </mat-error>
       <mat-form-field>
-        <input formControlName="email" matInput placeholder="Email"  name="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"><!--[(ngModel)]="user.emailId"-->
+        <input formControlName="email" matInput placeholder="Email"  name="email" required  pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
         <mat-error  >
           Please provide a valid email address
         </mat-error>
@@ -17,9 +17,13 @@
           Please provide a valid password
         </mat-error>
       </mat-form-field>
+      <mat-radio-group *ngIf="isPatient">
+        <mat-radio-button value="Doctor/Nurse">Doctor/Nurse</mat-radio-button>
+        <mat-radio-button value="Admin">Admin</mat-radio-button>
+      </mat-radio-group>
       <button mat-raised-button color="primary" >Login</button>  <!--[disabled]="!loginForm.valid"-->
     </form>
   </mat-card-content>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-  <a routerLink="/register" >New user? Click to signup</a>
+  <a routerLink="/register" *ngIf="!isPatient" >New user? Click to signup</a>
 </mat-card>

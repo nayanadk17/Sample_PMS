@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from '../models/user';
-import { LoginService } from '../services/login.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { EntryService } from '../services/entry.service';
+import {IUserLogin} from '../models/userLogin';
+import { Subscription } from 'rxjs';
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,11 +15,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   public loginValid:boolean = true;
-  user = new User();
+  @Input()
+  public isPatient:boolean=true;
 
   public loginForm ! :FormGroup;
 
-  constructor(private service:LoginService,public activeModal: NgbActiveModal,private formBuilder:FormBuilder,private http:HttpClient,private router:Router) { }
+  constructor(public activeModal: NgbActiveModal,private formBuilder:FormBuilder,private http:HttpClient,private router:Router,private entryService:EntryService) { }
 
   ngOnInit(): void {
     this.loginForm=this.formBuilder.group({
@@ -27,30 +29,34 @@ export class LoginComponent implements OnInit {
     }
     )
   }
+  userLogin!: IUserLogin;
+  subscription!:Subscription
 
   loginUser(){
-    this.service.loginUser(this.user);
-    console.log('Login success');
-  }
-
-  loginPatient(){
-    this.http.get<any>("http://localhost:3000/registerPatient")
-    .subscribe(res=>{
-      const user=res.find((a:any)=>{
-        return a.email==this.loginForm.value.email && a.password==this.loginForm.value.password
-      });
-      if(user){
-        alert("Login Success!!");
-        this.loginForm.reset();
-       // this.router.navigate(['dashboard'])
-      }else{
-        alert("user not found");
+      this.userLogin = {
+        "emailId": this.loginForm.value.email,
+        "password" : this.loginForm.value.password,
+        "roleId" :0
+      };
+      
+     this.subscription = this.entryService.login(this.userLogin).subscribe({
+      next:result=>{
+        //some operation based on results
+        const user:IUserLogin=result.find((a:any)=>{
+          return a.email==this.loginForm.value.email && a.password==this.loginForm.value.password
+        });
+        if(user){
+          alert("Login Success!!");
+          this.loginForm.reset();
+         // this.router.navigate(['dashboard'])
+        }else{
+          alert("user not found");
+        }
+      },
+      error:err=>{
+        console.log(err);
       }
-      // },err=>{
-      //   alert("Something went wrong!!")
-      // }
-    })
-  
+    });
   }
 }
 
